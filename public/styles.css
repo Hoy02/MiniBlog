@@ -1,0 +1,76 @@
+/* 배경색 및 전체 스타일 */
+body {
+    background-color: #DBC1AD;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    background-color: #F3E8EB;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+}
+
+/* 제목 스타일 */
+h2 {
+    color: #433E49;
+}
+
+/* 입력 필드 그룹 */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    color: #433E49;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 94%;
+    padding: 8px;
+    border: 1px solid #928490;
+    border-radius: 5px;
+    background-color: #F3E8EB;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #433E49;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #928490;
+}
+
+/* 링크 스타일 */
+p {
+    margin-top: 10px;
+}
+
+a {
+    color: #433E49;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a Post</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #F3E8EB;
+    }
+    .navbar {
+      background-color: #DBC1AD !important;
+    }
+    .navbar-brand {
+      color: #433E49 !important;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 600px;
+      background: #DBC1AD;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary {
+      background-color: #433E49;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #928490;
+    }
+    .form-label {
+      font-weight: bold;
+      color: #433E49;
+    }
+    .preview-img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      display: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="/">Mini Blog</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <% if (user) { %>
+                <li class="nav-item">
+                  <span class="nav-link" style="font-weight: bold;"><%= user.username %></span>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout" style="font-weight: bold;">로그아웃</a>
+                </li>
+              <% } else { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login" style="font-weight: bold;">로그인</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register" style="font-weight: bold;">회원가입</a>
+                </li>
+              <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Form Container -->
+  <div class="container mt-5">
+    <h2 class="text-center fw-bold">게시물 작성</h2>
+    <form action="/post" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">제목</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+      </div>
+      <div class="mb-3">
+        <label for="content" class="form-label">내용</label>
+        <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">이미지 업로드</label>
+        <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+        <img id="preview" class="preview-img" alt="Image Preview">
+      </div>
+      <button type="submit" class="btn btn-primary w-100">작성하기</button>
+    </form>
+  </div>
+
+  <!-- Image Preview Script -->
+  <script>
+    function previewImage(event) {
+      const input = event.target;
+      const preview = document.getElementById("preview");
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        preview.style.display = "none";
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
