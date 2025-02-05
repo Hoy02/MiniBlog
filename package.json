@@ -2,11 +2,11 @@
   "name": "travel-blog",
   "version": "1.0.0",
   "description": "A simple mini blog website",
-  "main": "Hoy/express.js",
+  "main": "express.js",
   "scripts": {
-    "start": "node Hoy/express.js",
+    "start": "node express.js",
     "build": "echo 'No build step necessary'",
-    "dev": "nodemon Hoy/express.js"
+    "dev": "nodemon express.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
