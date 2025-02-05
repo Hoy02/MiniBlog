@@ -15,12 +15,12 @@ const PORT = 3000;
 const router = express.Router();
 
 // MongoDB 연결
-mongoose.connect('mongodb://127.0.0.1:27017/travel-blog', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('✅ MongoDB Connected'))
-.catch(err => console.error('❌ MongoDB Connection Error:', err));
+const uri = "mongodb+srv://khoyoung02:ghdudrla02@travel-blog.l14b6.mongodb.net/?retryWrites=true&w=majority&appName=travel-blog";
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+mongoose.connect(uri, clientOptions)
+  .then(() => console.log("✅ MongoDB Connected!"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // 미들웨어 설정
 app.use(express.urlencoded({ extended: false }));
@@ -51,19 +51,25 @@ app.use('/auth', authRoutes);
 app.use('/', postRoutes);
 app.use('/post', postRoutes);
 
-// 서버 실행
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-// Set EJS as the templating engine
+// EJS 설정
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Static Files Middleware
+// 정적 파일 설정
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
-app.get('/', (req, res) => {
-  res.render('index', { posts });
+// 메인 페이지 라우트
+app.get('/', async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ createdAt: -1 });
+    res.render('index', { posts });
+  } catch (err) {
+    console.error("게시글 불러오기 오류:", err);
+    res.render('index', { posts: [] });
+  }
+});
+
+// 서버 실행
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
