@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const session = require('express-session');
 const flash = require("connect-flash");
 const passport = require('passport'); // Passport 설정 가져오기
@@ -10,17 +11,20 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const User = require('./models/User.js'); // User 모델
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const router = express.Router();
 
-// MongoDB 연결
-const uri = "mongodb+srv://khoyoung02:ghdudrla02@travel-blog.l14b6.mongodb.net/?retryWrites=true&w=majority&appName=travel-blog";
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+dotenv.config(); // .env 파일 로드
 
-mongoose.connect(uri, clientOptions)
-  .then(() => console.log("✅ MongoDB Connected!"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err));
+const MONGO_URI = process.env.MONGO_URI;
+
+mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log("MongoDB 연결 성공!"))
+.catch(err => console.log("MongoDB 연결 실패: ", err));
 
 // 미들웨어 설정
 app.use(express.urlencoded({ extended: false }));
@@ -71,5 +75,5 @@ app.get('/', async (req, res) => {
 
 // 서버 실행
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server is running on ${PORT}`);
 });
