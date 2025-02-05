@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+require('dotenv').config();
 const session = require('express-session');
 const flash = require("connect-flash");
 const passport = require('passport'); // Passport 설정 가져오기
