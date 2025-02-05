@@ -1,0 +1,33 @@
+{
+  "name": "travel-blog",
+  "version": "1.0.0",
+  "description": "A simple mini blog website",
+  "main": "Hoy/express.js",
+  "scripts": {
+    "start": "node Hoy/express.js",
+    "build": "echo 'No build step necessary'",
+    "dev": "nodemon Hoy/express.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.4",
+    "node-mysql": "^0.4.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.1"
+  },
+  "engines": {
+    "node": ">=22.11.0"
+  }
+}
