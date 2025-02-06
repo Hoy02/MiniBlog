@@ -1,7 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
 const session = require('express-session');
 const flash = require("connect-flash");
 const passport = require('passport'); // Passport 설정 가져오기
@@ -12,14 +10,11 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const User = require('./models/User.js'); // User 모델
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 const router = express.Router();
 
-dotenv.config(); // .env 파일 로드
-
-const MONGO_URI = "mongodb+srv://khoyoung02:ghdudrla02@travel-blog.l14b6.mongodb.net/?retryWrites=true&w=majority&appName=travel-blog";
-;
+const MONGO_URI = "mongodb://mongo:HEapKoAuTsaubtdNzcBSHiuJDsIVROYN@mongodb.railway.internal:27017";
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
